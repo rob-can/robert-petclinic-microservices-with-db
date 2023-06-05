@@ -152,7 +152,7 @@ resource "aws_iam_instance_profile" "petclinic-master-server-profile" {
   role = aws_iam_role.petclinic-master-server-s3-role.name
 }
 
-resource "aws_instance" "rc-kube-master" {
+resource "aws_instance" "kube-master" {
     ami = "ami-053b0d53c279acc90"
     instance_type = "t3a.medium"
     iam_instance_profile = aws_iam_instance_profile.petclinic-master-server-profile.name
@@ -161,7 +161,7 @@ resource "aws_instance" "rc-kube-master" {
     subnet_id = "subnet-c41ba589"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "kube-master"
+        Name = "rc-kube-master"
         Project = "tera-kube-ans"
         Role = "master"
         Id = "1"
@@ -169,7 +169,7 @@ resource "aws_instance" "rc-kube-master" {
     }
 }
 
-resource "aws_instance" "rc-worker-1" {
+resource "aws_instance" "worker-1" {
     ami = "ami-053b0d53c279acc90"
     instance_type = "t3a.medium"
     vpc_security_group_ids = [aws_security_group.petclinic-kube-worker-sg.id, aws_security_group.petclinic-mutual-sg.id]
@@ -177,7 +177,7 @@ resource "aws_instance" "rc-worker-1" {
     subnet_id = "subnet-c41ba589"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "worker-1"
+        Name = "rc-worker-1"
         Project = "tera-kube-ans"
         Role = "worker"
         Id = "1"
@@ -185,7 +185,7 @@ resource "aws_instance" "rc-worker-1" {
     }
 }
 
-resource "aws_instance" "rc-worker-2" {
+resource "aws_instance" "worker-2" {
     ami = "ami-053b0d53c279acc90"
     instance_type = "t3a.medium"
     vpc_security_group_ids = [aws_security_group.petclinic-kube-worker-sg.id, aws_security_group.petclinic-mutual-sg.id]
@@ -193,7 +193,7 @@ resource "aws_instance" "rc-worker-2" {
     subnet_id = "subnet-c41ba589"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
-        Name = "worker-2"
+        Name = "rc-worker-2"
         Project = "tera-kube-ans"
         Role = "worker"
         Id = "2"
